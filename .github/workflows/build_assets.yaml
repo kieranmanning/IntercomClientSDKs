@@ -1,11 +1,13 @@
 name: Build and Release SDKs
 
 on:
-  # Trigger on manual dispatch or tag push
-  workflow_dispatch:
-  push:
-    tags:
-      - "v*"
+  release:
+    types: [created]
+
+permissions:
+  contents: write
+  packages: write
+
 
 jobs:
   build-and-release:
@@ -35,24 +37,13 @@ jobs:
     #       cd swift6
     #       swift build -c release
 
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.ref_name || github.run_number }}
-          name: SDK Release ${{ github.ref_name || github.run_number }}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Upload Python SDK packages
         uses: softprops/action-gh-release@v2
         with:
-          files: python/dist/*
+            files: python/dist/*
+            tag_name: ${{ github.event.release.tag_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     #   - name: Upload Swift SDK
     #     uses: softprops/action-gh-release@v2
     #     with:
