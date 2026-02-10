@@ -1,0 +1,58 @@
+name: Build and Release SDKs
+
+on:
+  # Trigger on manual dispatch or tag push
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout SDK repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build Python package
+        run: |
+          cd python
+          python -m pip install --upgrade build setuptools wheel
+          python -m build --sdist --wheel
+          ls -lh dist
+
+      - name: Build Swift SDK
+        run: |
+          cd swift6
+          swift build -c release
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name || 'v' + github.run_number }}
+          name: SDK Release ${{ github.ref_name || github.run_number }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Python SDK packages
+        uses: softprops/action-gh-release@v2
+        with:
+          files: python/dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Swift SDK
+        uses: softprops/action-gh-release@v2
+        with:
+          files: swift6/build/release/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
