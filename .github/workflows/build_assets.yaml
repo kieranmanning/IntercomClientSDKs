@@ -56,3 +56,5 @@ jobs:
           files: swift6/build/release/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          
