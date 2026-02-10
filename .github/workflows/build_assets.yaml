@@ -20,6 +20,9 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Set up Swift
+        uses: swift-actions/setup-swift@v3
+
       - name: Build Python package
         run: |
           cd python
@@ -57,4 +60,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          
