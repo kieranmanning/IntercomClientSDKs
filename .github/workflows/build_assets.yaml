@@ -20,8 +20,8 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Set up Swift
-        uses: swift-actions/setup-swift@v3
+    #   - name: Set up Swift
+    #     uses: swift-actions/setup-swift@v3
 
       - name: Build Python package
         run: |
@@ -30,10 +30,10 @@ jobs:
           python -m build --sdist --wheel
           ls -lh dist
 
-      - name: Build Swift SDK
-        run: |
-          cd swift6
-          swift build -c release
+    #   - name: Build Swift SDK
+    #     run: |
+    #       cd swift6
+    #       swift build -c release
 
       - name: Create Release
         id: create_release
@@ -53,10 +53,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Swift SDK
-        uses: softprops/action-gh-release@v2
-        with:
-          files: swift6/build/release/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   - name: Upload Swift SDK
+    #     uses: softprops/action-gh-release@v2
+    #     with:
+    #       files: swift6/build/release/*
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
