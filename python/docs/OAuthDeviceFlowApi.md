@@ -83,7 +83,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **v1_oauth_token_create**
-> DeviceAuthorizationResponse v1_oauth_token_create(device_token_request)
+> DeviceAuthorizationResponse v1_oauth_token_create(grant_type, device_code, client_id)
 
 Device polls for token
 
@@ -95,7 +95,7 @@ Device polls for token
 ```python
 import transparenc_sdk
 from transparenc_sdk.models.device_authorization_response import DeviceAuthorizationResponse
-from transparenc_sdk.models.device_token_request import DeviceTokenRequest
+from transparenc_sdk.models.grant_type_enum import GrantTypeEnum
 from transparenc_sdk.rest import ApiException
 from pprint import pprint
 
@@ -110,11 +110,13 @@ configuration = transparenc_sdk.Configuration(
 with transparenc_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = transparenc_sdk.OAuthDeviceFlowApi(api_client)
-    device_token_request = transparenc_sdk.DeviceTokenRequest() # DeviceTokenRequest | 
+    grant_type = transparenc_sdk.GrantTypeEnum() # GrantTypeEnum | 
+    device_code = 'device_code_example' # str | 
+    client_id = 'client_id_example' # str | 
 
     try:
         # Device polls for token
-        api_response = api_instance.v1_oauth_token_create(device_token_request)
+        api_response = api_instance.v1_oauth_token_create(grant_type, device_code, client_id)
         print("The response of OAuthDeviceFlowApi->v1_oauth_token_create:\n")
         pprint(api_response)
     except Exception as e:
@@ -128,7 +130,9 @@ with transparenc_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_token_request** | [**DeviceTokenRequest**](DeviceTokenRequest.md)|  | 
+ **grant_type** | [**GrantTypeEnum**](GrantTypeEnum.md)|  | 
+ **device_code** | **str**|  | 
+ **client_id** | **str**|  | 
 
 ### Return type
 
@@ -140,7 +144,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 ### HTTP response details

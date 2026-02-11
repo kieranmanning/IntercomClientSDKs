@@ -95,7 +95,6 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [DeviceAuthorizationResponse](docs/DeviceAuthorizationResponse.md)
- - [DeviceTokenRequest](docs/DeviceTokenRequest.md)
  - [GrantTypeEnum](docs/GrantTypeEnum.md)
 
 

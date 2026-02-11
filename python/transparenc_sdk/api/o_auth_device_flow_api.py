@@ -15,10 +15,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import Field, StrictStr
 from typing import Optional
+from typing_extensions import Annotated
 from transparenc_sdk.models.device_authorization_response import DeviceAuthorizationResponse
-from transparenc_sdk.models.device_token_request import DeviceTokenRequest
+from transparenc_sdk.models.grant_type_enum import GrantTypeEnum
 
 from transparenc_sdk.api_client import ApiClient, RequestSerialized
 from transparenc_sdk.api_response import ApiResponse
@@ -359,7 +360,9 @@ class OAuthDeviceFlowApi:
     @validate_call
     def v1_oauth_token_create(
         self,
-        device_token_request: DeviceTokenRequest,
+        grant_type: GrantTypeEnum,
+        device_code: Annotated[str, Field(strict=True, max_length=255)],
+        client_id: Annotated[str, Field(strict=True, max_length=255)],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -377,8 +380,12 @@ class OAuthDeviceFlowApi:
 
         Device polls for token
 
-        :param device_token_request: (required)
-        :type device_token_request: DeviceTokenRequest
+        :param grant_type: (required)
+        :type grant_type: GrantTypeEnum
+        :param device_code: (required)
+        :type device_code: str
+        :param client_id: (required)
+        :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -402,7 +409,9 @@ class OAuthDeviceFlowApi:
         """ # noqa: E501
 
         _param = self._v1_oauth_token_create_serialize(
-            device_token_request=device_token_request,
+            grant_type=grant_type,
+            device_code=device_code,
+            client_id=client_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -426,7 +435,9 @@ class OAuthDeviceFlowApi:
     @validate_call
     def v1_oauth_token_create_with_http_info(
         self,
-        device_token_request: DeviceTokenRequest,
+        grant_type: GrantTypeEnum,
+        device_code: Annotated[str, Field(strict=True, max_length=255)],
+        client_id: Annotated[str, Field(strict=True, max_length=255)],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -444,8 +455,12 @@ class OAuthDeviceFlowApi:
 
         Device polls for token
 
-        :param device_token_request: (required)
-        :type device_token_request: DeviceTokenRequest
+        :param grant_type: (required)
+        :type grant_type: GrantTypeEnum
+        :param device_code: (required)
+        :type device_code: str
+        :param client_id: (required)
+        :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -469,7 +484,9 @@ class OAuthDeviceFlowApi:
         """ # noqa: E501
 
         _param = self._v1_oauth_token_create_serialize(
-            device_token_request=device_token_request,
+            grant_type=grant_type,
+            device_code=device_code,
+            client_id=client_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -493,7 +510,9 @@ class OAuthDeviceFlowApi:
     @validate_call
     def v1_oauth_token_create_without_preload_content(
         self,
-        device_token_request: DeviceTokenRequest,
+        grant_type: GrantTypeEnum,
+        device_code: Annotated[str, Field(strict=True, max_length=255)],
+        client_id: Annotated[str, Field(strict=True, max_length=255)],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -511,8 +530,12 @@ class OAuthDeviceFlowApi:
 
         Device polls for token
 
-        :param device_token_request: (required)
-        :type device_token_request: DeviceTokenRequest
+        :param grant_type: (required)
+        :type grant_type: GrantTypeEnum
+        :param device_code: (required)
+        :type device_code: str
+        :param client_id: (required)
+        :type client_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -536,7 +559,9 @@ class OAuthDeviceFlowApi:
         """ # noqa: E501
 
         _param = self._v1_oauth_token_create_serialize(
-            device_token_request=device_token_request,
+            grant_type=grant_type,
+            device_code=device_code,
+            client_id=client_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -555,7 +580,9 @@ class OAuthDeviceFlowApi:
 
     def _v1_oauth_token_create_serialize(
         self,
-        device_token_request,
+        grant_type,
+        device_code,
+        client_id,
         _request_auth,
         _content_type,
         _headers,
@@ -580,9 +607,13 @@ class OAuthDeviceFlowApi:
         # process the query parameters
         # process the header parameters
         # process the form parameters
+        if grant_type is not None:
+            _form_params.append(('grant_type', grant_type))
+        if device_code is not None:
+            _form_params.append(('device_code', device_code))
+        if client_id is not None:
+            _form_params.append(('client_id', client_id))
         # process the body parameter
-        if device_token_request is not None:
-            _body_params = device_token_request
 
 
         # set the HTTP header `Accept`
@@ -600,9 +631,7 @@ class OAuthDeviceFlowApi:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
-                        'application/json', 
-                        'application/x-www-form-urlencoded', 
-                        'multipart/form-data'
+                        'application/x-www-form-urlencoded'
                     ]
                 )
             )

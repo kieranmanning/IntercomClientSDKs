@@ -66,7 +66,7 @@ No authorization required
 
 # **v1OauthTokenCreate**
 ```swift
-    open class func v1OauthTokenCreate(deviceTokenRequest: DeviceTokenRequest, completion: @escaping (_ data: DeviceAuthorizationResponse?, _ error: Error?) -> Void)
+    open class func v1OauthTokenCreate(grantType: GrantTypeEnum, deviceCode: String, clientId: String, completion: @escaping (_ data: DeviceAuthorizationResponse?, _ error: Error?) -> Void)
 ```
 
 Device polls for token
@@ -78,10 +78,12 @@ Device polls for token
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import OpenAPIClient
 
-let deviceTokenRequest = DeviceTokenRequest(grantType: GrantTypeEnum(), deviceCode: "deviceCode_example", clientId: "clientId_example") // DeviceTokenRequest | 
+let grantType = GrantTypeEnum() // GrantTypeEnum | 
+let deviceCode = "deviceCode_example" // String | 
+let clientId = "clientId_example" // String | 
 
 // Device polls for token
-OAuthDeviceFlowAPI.v1OauthTokenCreate(deviceTokenRequest: deviceTokenRequest) { (response, error) in
+OAuthDeviceFlowAPI.v1OauthTokenCreate(grantType: grantType, deviceCode: deviceCode, clientId: clientId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -97,7 +99,9 @@ OAuthDeviceFlowAPI.v1OauthTokenCreate(deviceTokenRequest: deviceTokenRequest) { 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **deviceTokenRequest** | [**DeviceTokenRequest**](DeviceTokenRequest.md) |  | 
+ **grantType** | [**GrantTypeEnum**](GrantTypeEnum.md) |  | 
+ **deviceCode** | **String** |  | 
+ **clientId** | **String** |  | 
 
 ### Return type
 
@@ -109,7 +113,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

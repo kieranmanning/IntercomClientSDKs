@@ -29,7 +29,6 @@ __all__ = [
     "ApiAttributeError",
     "ApiException",
     "DeviceAuthorizationResponse",
-    "DeviceTokenRequest",
     "GrantTypeEnum",
 ]
 
@@ -49,6 +48,5 @@ from transparenc_sdk.exceptions import ApiException as ApiException
 
 # import models into sdk package
 from transparenc_sdk.models.device_authorization_response import DeviceAuthorizationResponse as DeviceAuthorizationResponse
-from transparenc_sdk.models.device_token_request import DeviceTokenRequest as DeviceTokenRequest
 from transparenc_sdk.models.grant_type_enum import GrantTypeEnum as GrantTypeEnum
 

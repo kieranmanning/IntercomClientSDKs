@@ -63,31 +63,42 @@ open class OAuthDeviceFlowAPI {
     /**
      Device polls for token
      
-     - parameter deviceTokenRequest: (body)  
+     - parameter grantType: (form)  
+     - parameter deviceCode: (form)  
+     - parameter clientId: (form)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceAuthorizationResponse
      */
-    open class func v1OauthTokenCreate(deviceTokenRequest: DeviceTokenRequest, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAuthorizationResponse {
-        return try await v1OauthTokenCreateWithRequestBuilder(deviceTokenRequest: deviceTokenRequest, apiConfiguration: apiConfiguration).execute().body
+    open class func v1OauthTokenCreate(grantType: GrantTypeEnum, deviceCode: String, clientId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAuthorizationResponse {
+        return try await v1OauthTokenCreateWithRequestBuilder(grantType: grantType, deviceCode: deviceCode, clientId: clientId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Device polls for token
      - POST /api/v1/oauth/token
      - Device polls for token
-     - parameter deviceTokenRequest: (body)  
+     - parameter grantType: (form)  
+     - parameter deviceCode: (form)  
+     - parameter clientId: (form)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceAuthorizationResponse> 
      */
-    open class func v1OauthTokenCreateWithRequestBuilder(deviceTokenRequest: DeviceTokenRequest, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<DeviceAuthorizationResponse> {
+    open class func v1OauthTokenCreateWithRequestBuilder(grantType: GrantTypeEnum, deviceCode: String, clientId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<DeviceAuthorizationResponse> {
         let localVariablePath = "/api/v1/oauth/token"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: deviceTokenRequest, codableHelper: apiConfiguration.codableHelper)
+        let localVariableFormParams: [String: (any Sendable)?] = [
+            "grant_type": grantType.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "device_code": deviceCode.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "client_id": clientId.asParameter(codableHelper: apiConfiguration.codableHelper),
+        ]
+
+        let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
+        let localVariableParameters = APIHelper.convertBoolToString(localVariableNonNullParameters)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
