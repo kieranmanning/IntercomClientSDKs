@@ -32,7 +32,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [DeviceAuthorizationRequest](docs/DeviceAuthorizationRequest.md)
  - [DeviceAuthorizationResponse](docs/DeviceAuthorizationResponse.md)
  - [DeviceTokenRequest](docs/DeviceTokenRequest.md)
  - [GrantTypeEnum](docs/GrantTypeEnum.md)

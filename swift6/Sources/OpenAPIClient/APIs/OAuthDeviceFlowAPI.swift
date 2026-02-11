@@ -12,31 +12,45 @@ open class OAuthDeviceFlowAPI {
     /**
      Start device authorization (Device Code Flow)
      
-     - parameter deviceAuthorizationRequest: (body)  
+     - parameter clientId: (form)  
+     - parameter deviceType: (form)  
+     - parameter deviceOs: (form)  
+     - parameter scope: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceAuthorizationResponse
      */
-    open class func v1OauthDeviceAuthorizationCreate(deviceAuthorizationRequest: DeviceAuthorizationRequest, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAuthorizationResponse {
-        return try await v1OauthDeviceAuthorizationCreateWithRequestBuilder(deviceAuthorizationRequest: deviceAuthorizationRequest, apiConfiguration: apiConfiguration).execute().body
+    open class func v1OauthDeviceAuthorizationCreate(clientId: String, deviceType: String, deviceOs: String, scope: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAuthorizationResponse {
+        return try await v1OauthDeviceAuthorizationCreateWithRequestBuilder(clientId: clientId, deviceType: deviceType, deviceOs: deviceOs, scope: scope, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Start device authorization (Device Code Flow)
      - POST /api/v1/oauth/device-authorization/
      - Device posts its metadata and receives a device_code and user_code.
-     - parameter deviceAuthorizationRequest: (body)  
+     - parameter clientId: (form)  
+     - parameter deviceType: (form)  
+     - parameter deviceOs: (form)  
+     - parameter scope: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceAuthorizationResponse> 
      */
-    open class func v1OauthDeviceAuthorizationCreateWithRequestBuilder(deviceAuthorizationRequest: DeviceAuthorizationRequest, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<DeviceAuthorizationResponse> {
+    open class func v1OauthDeviceAuthorizationCreateWithRequestBuilder(clientId: String, deviceType: String, deviceOs: String, scope: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<DeviceAuthorizationResponse> {
         let localVariablePath = "/api/v1/oauth/device-authorization/"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: deviceAuthorizationRequest, codableHelper: apiConfiguration.codableHelper)
+        let localVariableFormParams: [String: (any Sendable)?] = [
+            "client_id": clientId.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "scope": scope?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "device_type": deviceType.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "device_os": deviceOs.asParameter(codableHelper: apiConfiguration.codableHelper),
+        ]
+
+        let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
+        let localVariableParameters = APIHelper.convertBoolToString(localVariableNonNullParameters)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)

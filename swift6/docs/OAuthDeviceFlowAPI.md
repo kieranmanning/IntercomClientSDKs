@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 # **v1OauthDeviceAuthorizationCreate**
 ```swift
-    open class func v1OauthDeviceAuthorizationCreate(deviceAuthorizationRequest: DeviceAuthorizationRequest, completion: @escaping (_ data: DeviceAuthorizationResponse?, _ error: Error?) -> Void)
+    open class func v1OauthDeviceAuthorizationCreate(clientId: String, deviceType: String, deviceOs: String, scope: String? = nil, completion: @escaping (_ data: DeviceAuthorizationResponse?, _ error: Error?) -> Void)
 ```
 
 Start device authorization (Device Code Flow)
@@ -22,10 +22,13 @@ Device posts its metadata and receives a device_code and user_code.
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import OpenAPIClient
 
-let deviceAuthorizationRequest = DeviceAuthorizationRequest(clientId: "clientId_example", scope: "scope_example", deviceType: "deviceType_example", deviceOs: "deviceOs_example") // DeviceAuthorizationRequest | 
+let clientId = "clientId_example" // String | 
+let deviceType = "deviceType_example" // String | 
+let deviceOs = "deviceOs_example" // String | 
+let scope = "scope_example" // String |  (optional)
 
 // Start device authorization (Device Code Flow)
-OAuthDeviceFlowAPI.v1OauthDeviceAuthorizationCreate(deviceAuthorizationRequest: deviceAuthorizationRequest) { (response, error) in
+OAuthDeviceFlowAPI.v1OauthDeviceAuthorizationCreate(clientId: clientId, deviceType: deviceType, deviceOs: deviceOs, scope: scope) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -41,7 +44,10 @@ OAuthDeviceFlowAPI.v1OauthDeviceAuthorizationCreate(deviceAuthorizationRequest: 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **deviceAuthorizationRequest** | [**DeviceAuthorizationRequest**](DeviceAuthorizationRequest.md) |  | 
+ **clientId** | **String** |  | 
+ **deviceType** | **String** |  | 
+ **deviceOs** | **String** |  | 
+ **scope** | **String** |  | [optional] 
 
 ### Return type
 
@@ -53,7 +59,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

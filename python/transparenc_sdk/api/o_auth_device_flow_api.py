@@ -15,7 +15,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from transparenc_sdk.models.device_authorization_request import DeviceAuthorizationRequest
+from pydantic import StrictStr
+from typing import Optional
 from transparenc_sdk.models.device_authorization_response import DeviceAuthorizationResponse
 from transparenc_sdk.models.device_token_request import DeviceTokenRequest
 
@@ -40,7 +41,10 @@ class OAuthDeviceFlowApi:
     @validate_call
     def v1_oauth_device_authorization_create(
         self,
-        device_authorization_request: DeviceAuthorizationRequest,
+        client_id: StrictStr,
+        device_type: StrictStr,
+        device_os: StrictStr,
+        scope: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -58,8 +62,14 @@ class OAuthDeviceFlowApi:
 
         Device posts its metadata and receives a device_code and user_code.
 
-        :param device_authorization_request: (required)
-        :type device_authorization_request: DeviceAuthorizationRequest
+        :param client_id: (required)
+        :type client_id: str
+        :param device_type: (required)
+        :type device_type: str
+        :param device_os: (required)
+        :type device_os: str
+        :param scope:
+        :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -83,7 +93,10 @@ class OAuthDeviceFlowApi:
         """ # noqa: E501
 
         _param = self._v1_oauth_device_authorization_create_serialize(
-            device_authorization_request=device_authorization_request,
+            client_id=client_id,
+            device_type=device_type,
+            device_os=device_os,
+            scope=scope,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -107,7 +120,10 @@ class OAuthDeviceFlowApi:
     @validate_call
     def v1_oauth_device_authorization_create_with_http_info(
         self,
-        device_authorization_request: DeviceAuthorizationRequest,
+        client_id: StrictStr,
+        device_type: StrictStr,
+        device_os: StrictStr,
+        scope: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -125,8 +141,14 @@ class OAuthDeviceFlowApi:
 
         Device posts its metadata and receives a device_code and user_code.
 
-        :param device_authorization_request: (required)
-        :type device_authorization_request: DeviceAuthorizationRequest
+        :param client_id: (required)
+        :type client_id: str
+        :param device_type: (required)
+        :type device_type: str
+        :param device_os: (required)
+        :type device_os: str
+        :param scope:
+        :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -150,7 +172,10 @@ class OAuthDeviceFlowApi:
         """ # noqa: E501
 
         _param = self._v1_oauth_device_authorization_create_serialize(
-            device_authorization_request=device_authorization_request,
+            client_id=client_id,
+            device_type=device_type,
+            device_os=device_os,
+            scope=scope,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -174,7 +199,10 @@ class OAuthDeviceFlowApi:
     @validate_call
     def v1_oauth_device_authorization_create_without_preload_content(
         self,
-        device_authorization_request: DeviceAuthorizationRequest,
+        client_id: StrictStr,
+        device_type: StrictStr,
+        device_os: StrictStr,
+        scope: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -192,8 +220,14 @@ class OAuthDeviceFlowApi:
 
         Device posts its metadata and receives a device_code and user_code.
 
-        :param device_authorization_request: (required)
-        :type device_authorization_request: DeviceAuthorizationRequest
+        :param client_id: (required)
+        :type client_id: str
+        :param device_type: (required)
+        :type device_type: str
+        :param device_os: (required)
+        :type device_os: str
+        :param scope:
+        :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -217,7 +251,10 @@ class OAuthDeviceFlowApi:
         """ # noqa: E501
 
         _param = self._v1_oauth_device_authorization_create_serialize(
-            device_authorization_request=device_authorization_request,
+            client_id=client_id,
+            device_type=device_type,
+            device_os=device_os,
+            scope=scope,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -236,7 +273,10 @@ class OAuthDeviceFlowApi:
 
     def _v1_oauth_device_authorization_create_serialize(
         self,
-        device_authorization_request,
+        client_id,
+        device_type,
+        device_os,
+        scope,
         _request_auth,
         _content_type,
         _headers,
@@ -261,9 +301,15 @@ class OAuthDeviceFlowApi:
         # process the query parameters
         # process the header parameters
         # process the form parameters
+        if client_id is not None:
+            _form_params.append(('client_id', client_id))
+        if scope is not None:
+            _form_params.append(('scope', scope))
+        if device_type is not None:
+            _form_params.append(('device_type', device_type))
+        if device_os is not None:
+            _form_params.append(('device_os', device_os))
         # process the body parameter
-        if device_authorization_request is not None:
-            _body_params = device_authorization_request
 
 
         # set the HTTP header `Accept`
@@ -281,9 +327,7 @@ class OAuthDeviceFlowApi:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
-                        'application/json', 
-                        'application/x-www-form-urlencoded', 
-                        'multipart/form-data'
+                        'application/x-www-form-urlencoded'
                     ]
                 )
             )

@@ -13,7 +13,6 @@
 """  # noqa: E501
 
 # import models into model package
-from transparenc_sdk.models.device_authorization_request import DeviceAuthorizationRequest
 from transparenc_sdk.models.device_authorization_response import DeviceAuthorizationResponse
 from transparenc_sdk.models.device_token_request import DeviceTokenRequest
 from transparenc_sdk.models.grant_type_enum import GrantTypeEnum

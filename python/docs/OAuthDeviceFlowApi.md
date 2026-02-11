@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **v1_oauth_device_authorization_create**
-> DeviceAuthorizationResponse v1_oauth_device_authorization_create(device_authorization_request)
+> DeviceAuthorizationResponse v1_oauth_device_authorization_create(client_id, device_type, device_os, scope=scope)
 
 Start device authorization (Device Code Flow)
 
@@ -20,7 +20,6 @@ Device posts its metadata and receives a device_code and user_code.
 
 ```python
 import transparenc_sdk
-from transparenc_sdk.models.device_authorization_request import DeviceAuthorizationRequest
 from transparenc_sdk.models.device_authorization_response import DeviceAuthorizationResponse
 from transparenc_sdk.rest import ApiException
 from pprint import pprint
@@ -36,11 +35,14 @@ configuration = transparenc_sdk.Configuration(
 with transparenc_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = transparenc_sdk.OAuthDeviceFlowApi(api_client)
-    device_authorization_request = transparenc_sdk.DeviceAuthorizationRequest() # DeviceAuthorizationRequest | 
+    client_id = 'client_id_example' # str | 
+    device_type = 'device_type_example' # str | 
+    device_os = 'device_os_example' # str | 
+    scope = 'scope_example' # str |  (optional)
 
     try:
         # Start device authorization (Device Code Flow)
-        api_response = api_instance.v1_oauth_device_authorization_create(device_authorization_request)
+        api_response = api_instance.v1_oauth_device_authorization_create(client_id, device_type, device_os, scope=scope)
         print("The response of OAuthDeviceFlowApi->v1_oauth_device_authorization_create:\n")
         pprint(api_response)
     except Exception as e:
@@ -54,7 +56,10 @@ with transparenc_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_authorization_request** | [**DeviceAuthorizationRequest**](DeviceAuthorizationRequest.md)|  | 
+ **client_id** | **str**|  | 
+ **device_type** | **str**|  | 
+ **device_os** | **str**|  | 
+ **scope** | **str**|  | [optional] 
 
 ### Return type
 
@@ -66,7 +71,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 ### HTTP response details

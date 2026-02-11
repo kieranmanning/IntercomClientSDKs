@@ -67,11 +67,14 @@ configuration = transparenc_sdk.Configuration(
 with transparenc_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = transparenc_sdk.OAuthDeviceFlowApi(api_client)
-    device_authorization_request = transparenc_sdk.DeviceAuthorizationRequest() # DeviceAuthorizationRequest | 
+    client_id = 'client_id_example' # str | 
+    device_type = 'device_type_example' # str | 
+    device_os = 'device_os_example' # str | 
+    scope = 'scope_example' # str |  (optional)
 
     try:
         # Start device authorization (Device Code Flow)
-        api_response = api_instance.v1_oauth_device_authorization_create(device_authorization_request)
+        api_response = api_instance.v1_oauth_device_authorization_create(client_id, device_type, device_os, scope=scope)
         print("The response of OAuthDeviceFlowApi->v1_oauth_device_authorization_create:\n")
         pprint(api_response)
     except ApiException as e:
@@ -91,7 +94,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [DeviceAuthorizationRequest](docs/DeviceAuthorizationRequest.md)
  - [DeviceAuthorizationResponse](docs/DeviceAuthorizationResponse.md)
  - [DeviceTokenRequest](docs/DeviceTokenRequest.md)
  - [GrantTypeEnum](docs/GrantTypeEnum.md)
