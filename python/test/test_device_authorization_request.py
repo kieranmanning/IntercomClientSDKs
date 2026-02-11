@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.device_authorization_request import DeviceAuthorizationRequest
+from transparenc_sdk.models.device_authorization_request import DeviceAuthorizationRequest
 
 class TestDeviceAuthorizationRequest(unittest.TestCase):
     """DeviceAuthorizationRequest unit test stubs"""

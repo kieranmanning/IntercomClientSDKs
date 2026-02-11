@@ -1,4 +1,4 @@
-# openapi_client.OAuthDeviceFlowApi
+# transparenc_sdk.OAuthDeviceFlowApi
 
 All URIs are relative to *http://localhost*
 
@@ -19,24 +19,24 @@ Device posts its metadata and receives a device_code and user_code.
 
 
 ```python
-import openapi_client
-from openapi_client.models.device_authorization_request import DeviceAuthorizationRequest
-from openapi_client.models.device_authorization_response import DeviceAuthorizationResponse
-from openapi_client.rest import ApiException
+import transparenc_sdk
+from transparenc_sdk.models.device_authorization_request import DeviceAuthorizationRequest
+from transparenc_sdk.models.device_authorization_response import DeviceAuthorizationResponse
+from transparenc_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = transparenc_sdk.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with transparenc_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OAuthDeviceFlowApi(api_client)
-    device_authorization_request = openapi_client.DeviceAuthorizationRequest() # DeviceAuthorizationRequest | 
+    api_instance = transparenc_sdk.OAuthDeviceFlowApi(api_client)
+    device_authorization_request = transparenc_sdk.DeviceAuthorizationRequest() # DeviceAuthorizationRequest | 
 
     try:
         # Start device authorization (Device Code Flow)
@@ -88,24 +88,24 @@ Device polls for token
 
 
 ```python
-import openapi_client
-from openapi_client.models.device_authorization_response import DeviceAuthorizationResponse
-from openapi_client.models.device_token_request import DeviceTokenRequest
-from openapi_client.rest import ApiException
+import transparenc_sdk
+from transparenc_sdk.models.device_authorization_response import DeviceAuthorizationResponse
+from transparenc_sdk.models.device_token_request import DeviceTokenRequest
+from transparenc_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = transparenc_sdk.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with transparenc_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OAuthDeviceFlowApi(api_client)
-    device_token_request = openapi_client.DeviceTokenRequest() # DeviceTokenRequest | 
+    api_instance = transparenc_sdk.OAuthDeviceFlowApi(api_client)
+    device_token_request = transparenc_sdk.DeviceTokenRequest() # DeviceTokenRequest | 
 
     try:
         # Device polls for token

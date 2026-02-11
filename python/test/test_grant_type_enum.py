@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.models.grant_type_enum import GrantTypeEnum
+from transparenc_sdk.models.grant_type_enum import GrantTypeEnum
 
 class TestGrantTypeEnum(unittest.TestCase):
     """GrantTypeEnum unit test stubs"""

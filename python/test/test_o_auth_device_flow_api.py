@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.o_auth_device_flow_api import OAuthDeviceFlowApi
+from transparenc_sdk.api.o_auth_device_flow_api import OAuthDeviceFlowApi
 
 
 class TestOAuthDeviceFlowApi(unittest.TestCase):

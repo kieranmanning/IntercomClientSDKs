@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.device_token_request import DeviceTokenRequest
+from transparenc_sdk.models.device_token_request import DeviceTokenRequest
 
 # TODO update the JSON string below
 json = "{}"
