@@ -7,7 +7,8 @@
 
 import Foundation
 
-/** * &#x60;urn:ietf:params:oauth:grant-type:device_code&#x60; - urn:ietf:params:oauth:grant-type:device_code */
+/** * &#x60;refresh_token&#x60; - refresh_token * &#x60;urn:ietf:params:oauth:grant-type:device_code&#x60; - urn:ietf:params:oauth:grant-type:device_code */
 public enum GrantTypeEnum: String, Sendable, Codable, CaseIterable {
+    case refreshToken = "refresh_token"
     case urnIetfParamsOauthGrantTypeDeviceCode = "urn:ietf:params:oauth:grant-type:device_code"
 }

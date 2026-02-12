@@ -66,7 +66,7 @@ No authorization required
 
 # **v1OauthTokenCreate**
 ```swift
-    open class func v1OauthTokenCreate(grantType: GrantTypeEnum, deviceCode: String, clientId: String, completion: @escaping (_ data: DeviceTokenResponse?, _ error: Error?) -> Void)
+    open class func v1OauthTokenCreate(grantType: GrantTypeEnum, clientId: String, deviceCode: String? = nil, refreshToken: String? = nil, completion: @escaping (_ data: DeviceTokenResponse?, _ error: Error?) -> Void)
 ```
 
 Device polls for token
@@ -79,11 +79,12 @@ Device polls for token
 import OpenAPIClient
 
 let grantType = GrantTypeEnum() // GrantTypeEnum | 
-let deviceCode = "deviceCode_example" // String | 
 let clientId = "clientId_example" // String | 
+let deviceCode = "deviceCode_example" // String |  (optional)
+let refreshToken = "refreshToken_example" // String |  (optional)
 
 // Device polls for token
-OAuthDeviceFlowAPI.v1OauthTokenCreate(grantType: grantType, deviceCode: deviceCode, clientId: clientId) { (response, error) in
+OAuthDeviceFlowAPI.v1OauthTokenCreate(grantType: grantType, clientId: clientId, deviceCode: deviceCode, refreshToken: refreshToken) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -100,8 +101,9 @@ OAuthDeviceFlowAPI.v1OauthTokenCreate(grantType: grantType, deviceCode: deviceCo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **grantType** | [**GrantTypeEnum**](GrantTypeEnum.md) |  | 
- **deviceCode** | **String** |  | 
  **clientId** | **String** |  | 
+ **deviceCode** | **String** |  | [optional] 
+ **refreshToken** | **String** |  | [optional] 
 
 ### Return type
 

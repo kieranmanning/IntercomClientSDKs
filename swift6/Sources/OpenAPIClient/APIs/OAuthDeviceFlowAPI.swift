@@ -64,13 +64,14 @@ open class OAuthDeviceFlowAPI {
      Device polls for token
      
      - parameter grantType: (form)  
-     - parameter deviceCode: (form)  
      - parameter clientId: (form)  
+     - parameter deviceCode: (form)  (optional)
+     - parameter refreshToken: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceTokenResponse
      */
-    open class func v1OauthTokenCreate(grantType: GrantTypeEnum, deviceCode: String, clientId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceTokenResponse {
-        return try await v1OauthTokenCreateWithRequestBuilder(grantType: grantType, deviceCode: deviceCode, clientId: clientId, apiConfiguration: apiConfiguration).execute().body
+    open class func v1OauthTokenCreate(grantType: GrantTypeEnum, clientId: String, deviceCode: String? = nil, refreshToken: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceTokenResponse {
+        return try await v1OauthTokenCreateWithRequestBuilder(grantType: grantType, clientId: clientId, deviceCode: deviceCode, refreshToken: refreshToken, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -78,17 +79,19 @@ open class OAuthDeviceFlowAPI {
      - POST /api/v1/oauth/token
      - Device polls for token
      - parameter grantType: (form)  
-     - parameter deviceCode: (form)  
      - parameter clientId: (form)  
+     - parameter deviceCode: (form)  (optional)
+     - parameter refreshToken: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceTokenResponse> 
      */
-    open class func v1OauthTokenCreateWithRequestBuilder(grantType: GrantTypeEnum, deviceCode: String, clientId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<DeviceTokenResponse> {
+    open class func v1OauthTokenCreateWithRequestBuilder(grantType: GrantTypeEnum, clientId: String, deviceCode: String? = nil, refreshToken: String? = nil, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<DeviceTokenResponse> {
         let localVariablePath = "/api/v1/oauth/token"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
             "grant_type": grantType.asParameter(codableHelper: apiConfiguration.codableHelper),
-            "device_code": deviceCode.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "device_code": deviceCode?.asParameter(codableHelper: apiConfiguration.codableHelper),
+            "refresh_token": refreshToken?.asParameter(codableHelper: apiConfiguration.codableHelper),
             "client_id": clientId.asParameter(codableHelper: apiConfiguration.codableHelper),
         ]
 

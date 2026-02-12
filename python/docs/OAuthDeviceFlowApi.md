@@ -83,7 +83,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **v1_oauth_token_create**
-> DeviceTokenResponse v1_oauth_token_create(grant_type, device_code, client_id)
+> DeviceTokenResponse v1_oauth_token_create(grant_type, client_id, device_code=device_code, refresh_token=refresh_token)
 
 Device polls for token
 
@@ -111,12 +111,13 @@ with transparenc_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = transparenc_sdk.OAuthDeviceFlowApi(api_client)
     grant_type = transparenc_sdk.GrantTypeEnum() # GrantTypeEnum | 
-    device_code = 'device_code_example' # str | 
     client_id = 'client_id_example' # str | 
+    device_code = 'device_code_example' # str |  (optional)
+    refresh_token = 'refresh_token_example' # str |  (optional)
 
     try:
         # Device polls for token
-        api_response = api_instance.v1_oauth_token_create(grant_type, device_code, client_id)
+        api_response = api_instance.v1_oauth_token_create(grant_type, client_id, device_code=device_code, refresh_token=refresh_token)
         print("The response of OAuthDeviceFlowApi->v1_oauth_token_create:\n")
         pprint(api_response)
     except Exception as e:
@@ -131,8 +132,9 @@ with transparenc_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **grant_type** | [**GrantTypeEnum**](GrantTypeEnum.md)|  | 
- **device_code** | **str**|  | 
  **client_id** | **str**|  | 
+ **device_code** | **str**|  | [optional] 
+ **refresh_token** | **str**|  | [optional] 
 
 ### Return type
 

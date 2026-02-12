@@ -4,8 +4,8 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.15'
   s.tvos.deployment_target = '13.0'
   s.watchos.deployment_target = '6.0'
-  s.version = 'v1.0.0+build50'
-  s.source = { :git => 'git@github.com:OpenAPITools/openapi-generator.git', :tag => 'vv1.0.0+build50' }
+  s.version = 'v1.0.0+build51'
+  s.source = { :git => 'git@github.com:OpenAPITools/openapi-generator.git', :tag => 'vv1.0.0+build51' }
   s.authors = 'OpenAPI Generator'
   s.license = 'Proprietary'
   s.homepage = 'https://github.com/OpenAPITools/openapi-generator'
