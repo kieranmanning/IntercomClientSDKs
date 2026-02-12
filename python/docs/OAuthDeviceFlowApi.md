@@ -83,7 +83,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **v1_oauth_token_create**
-> DeviceAuthorizationResponse v1_oauth_token_create(grant_type, device_code, client_id)
+> DeviceTokenResponse v1_oauth_token_create(grant_type, device_code, client_id)
 
 Device polls for token
 
@@ -94,7 +94,7 @@ Device polls for token
 
 ```python
 import transparenc_sdk
-from transparenc_sdk.models.device_authorization_response import DeviceAuthorizationResponse
+from transparenc_sdk.models.device_token_response import DeviceTokenResponse
 from transparenc_sdk.models.grant_type_enum import GrantTypeEnum
 from transparenc_sdk.rest import ApiException
 from pprint import pprint
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DeviceAuthorizationResponse**](DeviceAuthorizationResponse.md)
+[**DeviceTokenResponse**](DeviceTokenResponse.md)
 
 ### Authorization
 

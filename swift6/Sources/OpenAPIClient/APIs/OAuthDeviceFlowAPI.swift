@@ -67,9 +67,9 @@ open class OAuthDeviceFlowAPI {
      - parameter deviceCode: (form)  
      - parameter clientId: (form)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: DeviceAuthorizationResponse
+     - returns: DeviceTokenResponse
      */
-    open class func v1OauthTokenCreate(grantType: GrantTypeEnum, deviceCode: String, clientId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAuthorizationResponse {
+    open class func v1OauthTokenCreate(grantType: GrantTypeEnum, deviceCode: String, clientId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceTokenResponse {
         return try await v1OauthTokenCreateWithRequestBuilder(grantType: grantType, deviceCode: deviceCode, clientId: clientId, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -81,9 +81,9 @@ open class OAuthDeviceFlowAPI {
      - parameter deviceCode: (form)  
      - parameter clientId: (form)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<DeviceAuthorizationResponse> 
+     - returns: RequestBuilder<DeviceTokenResponse> 
      */
-    open class func v1OauthTokenCreateWithRequestBuilder(grantType: GrantTypeEnum, deviceCode: String, clientId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<DeviceAuthorizationResponse> {
+    open class func v1OauthTokenCreateWithRequestBuilder(grantType: GrantTypeEnum, deviceCode: String, clientId: String, apiConfiguration: OpenAPIClientAPIConfiguration = OpenAPIClientAPIConfiguration.shared) -> RequestBuilder<DeviceTokenResponse> {
         let localVariablePath = "/api/v1/oauth/token"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableFormParams: [String: (any Sendable)?] = [
@@ -103,7 +103,7 @@ open class OAuthDeviceFlowAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<DeviceAuthorizationResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<DeviceTokenResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
     }

@@ -18,20 +18,20 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DeviceAuthorizationResponse(BaseModel):
+class DeviceTokenResponse(BaseModel):
     """
-    DeviceAuthorizationResponse
+    DeviceTokenResponse
     """ # noqa: E501
-    device_code: StrictStr
-    user_code: StrictStr
-    verification_uri: StrictStr
+    access_token: StrictStr
+    token_type: Optional[StrictStr] = 'Bearer'
     expires_in: StrictInt
-    interval: StrictInt
-    __properties: ClassVar[List[str]] = ["device_code", "user_code", "verification_uri", "expires_in", "interval"]
+    refresh_token: Optional[StrictStr] = None
+    scope: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["access_token", "token_type", "expires_in", "refresh_token", "scope"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +51,7 @@ class DeviceAuthorizationResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeviceAuthorizationResponse from a JSON string"""
+        """Create an instance of DeviceTokenResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -76,7 +76,7 @@ class DeviceAuthorizationResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeviceAuthorizationResponse from a dict"""
+        """Create an instance of DeviceTokenResponse from a dict"""
         if obj is None:
             return None
 
@@ -84,11 +84,11 @@ class DeviceAuthorizationResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "device_code": obj.get("device_code"),
-            "user_code": obj.get("user_code"),
-            "verification_uri": obj.get("verification_uri"),
+            "access_token": obj.get("access_token"),
+            "token_type": obj.get("token_type") if obj.get("token_type") is not None else 'Bearer',
             "expires_in": obj.get("expires_in"),
-            "interval": obj.get("interval")
+            "refresh_token": obj.get("refresh_token"),
+            "scope": obj.get("scope")
         })
         return _obj
 

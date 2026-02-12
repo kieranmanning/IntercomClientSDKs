@@ -66,7 +66,7 @@ No authorization required
 
 # **v1OauthTokenCreate**
 ```swift
-    open class func v1OauthTokenCreate(grantType: GrantTypeEnum, deviceCode: String, clientId: String, completion: @escaping (_ data: DeviceAuthorizationResponse?, _ error: Error?) -> Void)
+    open class func v1OauthTokenCreate(grantType: GrantTypeEnum, deviceCode: String, clientId: String, completion: @escaping (_ data: DeviceTokenResponse?, _ error: Error?) -> Void)
 ```
 
 Device polls for token
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DeviceAuthorizationResponse**](DeviceAuthorizationResponse.md)
+[**DeviceTokenResponse**](DeviceTokenResponse.md)
 
 ### Authorization
 
